@@ -13,7 +13,7 @@ function tfa_register_menus_route() {
     'callback' => 'tfa_get_menus'
   ) );
 
-  register_rest_route( 'wp/v2', '/menus/(?P<id>\d+)', array(
+  register_rest_route( 'wp/v2', '/menus/(?P<location>\w+)', array(
     'methods' => 'GET',
     'callback' => 'tfa_get_menu'
   ) );
@@ -51,7 +51,10 @@ function tfa_get_menus() {
  * @author Tat Thien
  **/
 function tfa_get_menu( $request ) {
-  $id = ( int ) $request['id'];
+  $location = $request['location'];
+  $locations = get_nav_menu_locations();
+  $id = $locations[$location];
+
   $wp_menu_object = $id ? wp_get_nav_menu_object( $id ) : array();
   $wp_menu_items = $id ? wp_get_nav_menu_items( $id ) : array();
 

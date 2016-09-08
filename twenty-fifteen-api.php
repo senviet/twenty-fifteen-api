@@ -10,6 +10,14 @@ Author URI: http://senviet.org
 License: GPL2
 */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
+define( 'TFA_DIR_PATH', plugin_dir_path( __FILE__ ) );
+
+require_once  TFA_DIR_PATH . '/includes/tfa-api-menus.php';
+
 /**
  * Register route
  */

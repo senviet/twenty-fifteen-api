@@ -28,17 +28,11 @@ add_action( 'rest_api_init', 'tfa_register_menus_route' );
  * @author Tat Thien
  **/
 function tfa_get_menus() {
-  $wp_menus = wp_get_nav_menus();
-  $rest_menus = array();
-  $i = 0;
-  foreach ( $wp_menus as $wp_menu ) {
-    $menu = ( array ) $wp_menu;
-    $rest_menus[$i]['id'] = $menu['term_id'];
-    $rest_menus[$i]['name'] = $menu['name'];
-    $rest_menus[$i]['description'] = $menu['description'];
-    $rest_menus[$i]['count'] = $menu['count'];
+  $menus = get_registered_nav_menus();
 
-    $i++;
+  $rest_menus = array();
+  foreach ( $menus as $location => $description ) {
+    $rest_menus[$location] = tfa_get_menu( array( 'location' => $location ) );
   }
 
   return $rest_menus;

@@ -15,7 +15,8 @@ if (!defined('ABSPATH')) {
 
 define('TFA_DIR_PATH', plugin_dir_path(__FILE__));
 
-require_once TFA_DIR_PATH.'/includes/tfa-api-menus.php';
+require_once TFA_DIR_PATH.'/includes/menu-api.php';
+require_once TFA_DIR_PATH.'/includes/widget-api.php';
 
 /**
  * Register route.

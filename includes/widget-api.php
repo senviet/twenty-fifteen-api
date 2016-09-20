@@ -17,8 +17,7 @@ add_action( 'rest_api_init', 'tfa_register_widget_route' );
 
 function tfa_get_widgets(){
 	$sidebarSettings = get_option('sidebars_widgets');
-	unset($sidebarSettings['wp_inactive_widgets']);
-	unset($sidebarSettings['array_version']);
+	unset($sidebarSettings['wp_inactive_widgets'], $sidebarSettings['array_version']);
 	$sidebarOptions = [];
 	foreach ($sidebarSettings as $sidebarId => $sidebar){
 		$sidebarOptions[$sidebarId] = [];

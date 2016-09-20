@@ -48,29 +48,32 @@ function tfa_get_menu( $request ) {
   $location = $request['location'];
   $locations = get_nav_menu_locations();
   $id = $locations[$location];
+	return tfa_get_menu_items($id);
+}
 
-  $wp_menu_object = $id ? wp_get_nav_menu_object( $id ) : array();
-  $wp_menu_items = $id ? wp_get_nav_menu_items( $id ) : array();
+function tfa_get_menu_items($id){
+	$wp_menu_object = $id ? wp_get_nav_menu_object( $id ) : array();
+	$wp_menu_items = $id ? wp_get_nav_menu_items( $id ) : array();
 
-  $rest_menu = array();
+	$rest_menu = array();
 
-  if( $wp_menu_object ) {
-    $menu = ( array ) $wp_menu_object;
-    $rest_menu['id'] = $menu['term_id'];
-    $rest_menu['name'] = $menu['name'];
-    $rest_menu['description'] = $menu['description'];
-    $rest_menu['count'] = $menu['count'];
+	if( $wp_menu_object ) {
+		$menu = ( array ) $wp_menu_object;
+		$rest_menu['id'] = $menu['term_id'];
+		$rest_menu['name'] = $menu['name'];
+		$rest_menu['description'] = $menu['description'];
+		$rest_menu['count'] = $menu['count'];
 
-    $rest_menu_items = array();
-    foreach ( $wp_menu_items as $item ) {
-      $rest_menu_items[] = tfa_format_menu_item( $item );
-    }
+		$rest_menu_items = array();
+		foreach ( $wp_menu_items as $item ) {
+			$rest_menu_items[] = tfa_format_menu_item( $item );
+		}
 
-    $rest_menu_items = tfa_nested_menu_items( $rest_menu_items, 0);
-    $rest_menu['items'] = $rest_menu_items;
-  }
+		$rest_menu_items = tfa_nested_menu_items( $rest_menu_items, 0);
+		$rest_menu['items'] = $rest_menu_items;
+	}
 
-  return $rest_menu;
+	return $rest_menu;
 }
 
 /**
